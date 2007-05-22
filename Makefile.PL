@@ -11,6 +11,7 @@ WriteMakefile(
     PREREQ_PM => {
         'Test::More' => 0,
 		'WWW::Mechanize' => 1.22,
+		'Crypt::SSLeay' => 0.53,
     },
     dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean               => { FILES => 'Net-SMS-MyTMN-*' },
