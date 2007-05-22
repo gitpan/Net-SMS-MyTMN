@@ -4,3 +4,5 @@ Revision history for Net-SMS-MyTMN
         First version, released on an unsuspecting world.
 0.02    21-05-2007 15:15:20 WEST
         Added WWW::Mechanize to Makefile.PL
+0.03    21-05-2007 20:54:10 WEST
+        Corrected version number

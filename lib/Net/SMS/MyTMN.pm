@@ -11,13 +11,13 @@ Net::SMS::MyTMN - Send SMS trough MyTMN!
 
 =head1 VERSION
 
-Version 0.01
+Version 0.03
 
 =cut
 
 use vars qw($VERSION @ISA @EXPORT @EXPORT_OK %EXPORT_TAGS);
 
-$VERSION = '0.02';
+$VERSION = '0.03';
 @ISA = qw(Exporter);
 @EXPORT = qw();
 %EXPORT_TAGS = (
