@@ -11,13 +11,13 @@ Net::SMS::MyTMN - Send SMS trough MyTMN!
 
 =head1 VERSION
 
-Version 0.04
+Version 0.05
 
 =cut
 
 use vars qw($VERSION @ISA @EXPORT @EXPORT_OK %EXPORT_TAGS);
 
-$VERSION = '0.04';
+$VERSION = '0.05';
 @ISA = qw(Exporter);
 @EXPORT = qw();
 %EXPORT_TAGS = (
@@ -84,28 +84,41 @@ sub sms_mytmn {
 
 	return $valid unless !$valid;
 
-
-	my $mech = WWW::Mechanize->new();
-
-	$mech->get('https://www.mytmn.pt/web/user/LoginUser.po');
-	$mech->submit_form(
-		form_number => 1,
-		fields    => {
-			'username' => $username,
-			'password' => $password,
-		},
-	);
-	sleep 1;
-
-	$mech->get('http://www.mytmn.pt/web/easysms/EasySms.po');
-	
-	my $target_fields = {'message'=>$message};
+	my $target_fields = {
+		'message'=>$message,
+		'event' => 'confirmSend',
+	};
 
 	my $i = 1;
 	foreach (@{$targets}) { $target_fields->{'phoneNumber' . $i} = $_; $i++; }
 
-	$mech->submit_form(form_name => 'easySmsForm',fields => $target_fields);
-	
+	my $mech = WWW::Mechanize->new();
+
+	$mech->get('http://www.tmn.pt:80/portal/site/tmn');
+
+	$mech->submit_form(
+		form_number => 1,
+		fields    => {
+			'usr' => $username,
+			'pwd' => $password,
+		},
+	);
+
+	sleep 1;
+
+	my $r = $mech->get('http://my.tmn.pt/web/easysms/EasySmsConfirmSend.po');
+
+	my ($idsessao) = $r->content() =~/\.*tmnsessionid\%3D(\w{32})\.*/gmx;
+
+	die "Cannot read sessionid!\n" unless $idsessao;
+
+	$mech->get(qq|http://my.tmn.pt/web/easysms/EasySms.po?silentauthdone=1&tmnsessionid=$idsessao|);
+
+	my $rr = $mech->submit_form(
+		form_name => 'easySmsForm',
+		fields => $target_fields,
+	);
+
 	$mech->submit_form(form_name => 'headerForm');
 	
 	undef $mech;

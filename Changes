@@ -9,3 +9,5 @@ Revision history for Net-SMS-MyTMN
 0.04    21-05-2007 22:53:12 WEST
         Added Crypt::SSLeay to the Makefile.PL as this module is required by
 		WWW::Mechanize to deal with https pages
+0.05    24-07-2007 11:53:12 WEST
+        Modified to reflect the changes introduced by TMN on July 2007
