@@ -14,5 +14,7 @@ Revision history for Net-SMS-MyTMN
 0.06    18-10-2009 01:07:10 WEST
         Added function check_mytmn() to get how many free sms are left for the
 0.07    12-12-2010 20:21:43 WEST
+        Wrong!
+0.08    12-12-2010 20:21:43 WEST
         Updated regular expression to match the characters in the password
 		(thank you Vasco Santos)

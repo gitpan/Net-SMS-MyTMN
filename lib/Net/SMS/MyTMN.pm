@@ -11,13 +11,13 @@ Net::SMS::MyTMN - Send SMS trough MyTMN!
 
 =head1 VERSION
 
-Version 0.07
+Version 0.08
 
 =cut
 
 use vars qw($VERSION @ISA @EXPORT @EXPORT_OK %EXPORT_TAGS);
 
-$VERSION     = '0.07';
+$VERSION     = '0.08';
 @ISA         = qw(Exporter);
 @EXPORT      = qw();
 %EXPORT_TAGS = (
@@ -209,7 +209,7 @@ sub _valid {
     return _errors(2)
       unless $self->{'password'}
           && $self->{'password'} =~
-          /^\w+\W+$/;    # need to check wich characters are allowed
+          /^\w+|\W+$/;    # need to check wich characters are allowed
 
     return _errors(3)
       unless $self->{'targets'}

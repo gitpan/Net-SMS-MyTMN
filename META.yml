@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:                     Net-SMS-MyTMN
-version:                  0.07
+version:                  0.08
 abstract:                 Send SMS trough TMN
 author:
   - Miguel Santinho <cpan@simplicidade.com>
